@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe5e6174-d978-4c1f-a1e0-14086e8743c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExportorDownload/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExportorDownload/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UploadContentWin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/UploadContentWin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/homePage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/homePage/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UploadContentWin/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="33" column="55" lean-forward="true" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+            <state relative-caret-position="248">
+              <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -157,7 +153,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1583570466151</updated>
-      <workItem from="1583570470519" duration="15681000" />
+      <workItem from="1583570470519" duration="15891000" />
     </task>
     <task id="LOCAL-00001" summary="new language project">
       <created>1583571045394</created>
@@ -180,11 +176,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583583433373</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix about excel is null">
+      <created>1583592558746</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583592558746</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15681000" />
+    <option name="totallyTimeSpent" value="15891000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -231,7 +234,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new language project" />
     <MESSAGE value="bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixed" />
+    <MESSAGE value="fix about excel is null" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix about excel is null" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Popup window/index.js">
@@ -365,13 +369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="30" lean-forward="true" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/xlsx/types/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -400,10 +397,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="30" lean-forward="true" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/UploadContentWin/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="33" column="55" lean-forward="true" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+        <state relative-caret-position="248">
+          <caret line="25" column="26" lean-forward="true" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
