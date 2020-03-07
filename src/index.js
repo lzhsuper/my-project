@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Login from './login_page';
+import Homepage from './homePage'
 import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+import {BrowserRouter as Router,Redirect,Route,Switch} from 'react-router-dom'
+import 'typeface-roboto';
+ReactDOM.render(
+    <Router>
+        <Switch>
+        <Route path="/login" exact component={Login} />
+        <Route path="/homePage"  component={Homepage}/>
+        <Redirect to="/login" />
+        </Switch>
+    </Router>,document.getElementById('body')
+);
 serviceWorker.unregister();

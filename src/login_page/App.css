@@ -1,0 +1,170 @@
+.loginUi {
+    position: absolute;
+    z-index: 0;
+    width: 50%;
+    height: 55%;
+    background-color: #2f2313;
+    left: 26%;
+    top: 20%;
+    background-position: -140px 0;
+    background-repeat: no-repeat;
+    /*background-size: 100%;*/
+    background-image: url("./images/timg.jpg");
+    border-radius: 20px;
+    box-shadow: 20px 20px 25px #0b0605;
+    outline: none;
+}
+
+.usernameinput {
+    color: rgba(70, 70, 70, 0.93);
+    font-size: 25px;
+    line-height: 50px;
+    position: relative;
+    z-index: 1;
+    top: 20%;
+    width: 40%;
+    height: 7%;
+    border-radius: 100px;
+    text-align: center;
+    outline: none;
+}
+
+.passwordinput {
+    color: rgba(70, 70, 70, 0.93);
+    font-size: 25px;
+    line-height: 50px;
+    position: relative;
+    z-index: 1;
+    top: 30%;
+    width: 40%;
+    height: 7%;
+    border-radius: 100px;
+    text-align: center;
+    outline: none;
+}
+
+.loginbutton {
+    position: relative;
+    z-index: 1;
+    width: 15%;
+    height: 10%;
+    border-radius: 50px;
+    top: 45%;
+    left: -5%;
+    font-size: 20px;
+    background-color: rgba(110, 102, 54, 0.72);
+    outline: none;
+}
+
+.registered {
+    position: relative;
+    z-index: 1;
+    width: 15%;
+    left: 5%;
+    height: 10%;
+    border-radius: 50px;
+    top: 45%;
+    font-size: 20px;
+    background-color: rgba(110, 102, 54, 0.72);
+    outline: none;
+}
+
+.locat {
+    position: relative;
+    z-index: 1;
+    top: 20%;
+    height: 100%;
+    width: 100%;
+    left: -3%;
+    /*background-color: white;*/
+}
+.locat_s{
+    position: relative;
+    z-index: 1;
+    top: 20%;
+    height: 100%;
+    width: 100%;
+    left: 1%;
+    /*background-color: white;*/
+}
+.myicon-tick-checked {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #2ac845;
+    top: 23%;
+    right: 4%;
+}
+.myicon-tick-worring {
+    display: inline-block;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    top: 23%;
+    /*right: 8%;*/
+}
+.loginresult_fail {
+    position: relative;
+    z-index: 1;
+    width: 260px;
+    height: 26%;
+    border-radius: 5px;
+    font-size: 17px;
+    /*top: -4%;*/
+    text-align: center;
+    background-color: white;
+    box-shadow:0 2px 4px #0b0605;
+    color: rgba(218, 0, 0, 0.63);
+    animation: tofail 500ms forwards;
+    border: 0.1px solid black;
+    margin: auto;
+}
+.loginresult_suc {
+    position: relative;
+    z-index: 1;
+    width: 230px;
+    height: 26%;
+    border-radius: 5px;
+    font-size: 17px;
+    /*top: -4%;*/
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 2px 4px #0b0605;
+    color: rgba(218, 0, 0, 0.63);
+    animation: tofail 500ms forwards;
+    border: 0.1px solid black;
+    margin: auto;
+}
+@keyframes tofail {
+    0%{
+        top: -40%;
+    }
+    100%{
+        top: 50%;
+    }
+}
+
+.bigdiv {
+    position: absolute;
+    top: 8%;
+    width: 100%;
+    height: 80%;
+    align-items: center;
+    /*background-color: #30799B;*/
+}
+.loginstatuicon{
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    top: 24%;
+    left: -1%;
+}
+.loginstatu{
+    position: absolute;
+    width: 100%;
+    height: 15%;
+}

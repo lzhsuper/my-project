@@ -1,0 +1,1 @@
+ docker run -d -i -t -e REACT_APP_HOST="34.221.26.139" -p 3000:3000  test.tapplock.com:3000/my-project:test
