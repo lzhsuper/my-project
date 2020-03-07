@@ -80,6 +80,7 @@ class Homepage extends Component {
             status: 'ALL',
             uploadcontent: null,
             uploadfilename: null,
+            uploadfiletitle:[],
         };
         this.projectselect = this.projectselect.bind(this);
         this.changejectselect = this.changejectselect.bind(this);
@@ -101,8 +102,11 @@ class Homepage extends Component {
         this.changeuploadcontent = this.changeuploadcontent.bind(this);
         this.ifUploadWinClose = this.ifUploadWinClose.bind(this);
         this.setuploadname = this.setuploadname.bind(this);
+        this.setuploadtitle = this.setuploadtitle.bind(this);
     }
-
+    setuploadtitle(event){
+        this.setState({uploadfiletitle:event})
+    }
     setuploadname(event) {
         this.setState({uploadfilename: event})
     }
@@ -595,12 +599,12 @@ class Homepage extends Component {
                             <div className="export">
                                 <ExportOrDownload result={this.state.result_message} ifselect='export'
                                                   SetHomeUpload={this.changeuploadcontent}
-                                                  setuploadname={this.setuploadname} result_message={this.state.result_message}/>
+                                                  setuploadname={this.setuploadname} result_message={this.state.result_message} setuploadtitle={this.setuploadtitle}/>
                             </div>
                             <div className="Upload">
                                 <ExportOrDownload result={this.state.result_message} ifselect='upload'
                                                   SetHomeUpload={this.changeuploadcontent}
-                                                  setuploadname={this.setuploadname} result_message={this.state.result_message}/>
+                                                  setuploadname={this.setuploadname} result_message={this.state.result_message} setuploadtitle={this.setuploadtitle}/>
                             </div>
                         </div>
                         {this.state.result_message === null || this.state.result_message[0].length === 0 || (this.state.result_message[0][0] && this.state.result_message[0][0].project_id) || false
@@ -759,7 +763,8 @@ class Homepage extends Component {
                             this.state.uploadcontent !== null ?
                                 <div>
                                     <UploadContentWin title='UploadContent' content={this.state.uploadcontent}
-                                                      close={this.ifUploadWinClose} refreceToken={this.refreceToken} filename={this.state.uploadfilename}/>
+                                                      close={this.ifUploadWinClose} refreceToken={this.refreceToken}
+                                                      filename={this.state.uploadfilename} languageTitle={this.state.uploadfiletitle}/>
                                 </div> : null
                         }
                     </div>

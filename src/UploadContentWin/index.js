@@ -19,19 +19,10 @@ const MyButton = styled(Button)({
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function UploadContentWin({title, content, close, refreceToken, filename}) {
+export default function UploadContentWin({title, content, close, refreceToken, filename, languageTitle}) {
     content.map((item) => item.id = Number(item.id));
     content.map((item) => Object.keys(item).map((key) => item[key] === 'No content' ? item[key] = null : item[key] = item[key]));
-    // content.map((item) => Object.keys(item).map((key)=> !(item[key] === item[key]) ? item[key] = 'No content' :item[key] === 'null' ? item[key] = 'No content' : item[key] = item[key]));
     const [reponse, setreponse] = useState(null);
-    // function getStr(data) {
-    //     var jsonData = JSON.stringify(data).replace(/\"/g, "");  //这里去掉所有"
-    //     jsonData = jsonData.replace(/\:/g, "\:\"").replace(/\,/g, "\"\,").replace(/\}\]/g, "\"\}\]").replace(/\}\"\,\{/g, "\"\}\,\{");
-    //     jsonData = jsonData.replace(/%/g,'\\%');
-    //     console.log(jsonData);
-    //     return jsonData
-    // data = eval(" (" + jsonData + ") ");
-    // }
     const submit = () => {
         let contentup = JSON.stringify(content);
         // console.log(contentup.match(/(\")\w*(\"\:)/g)[0]);
@@ -65,8 +56,6 @@ export default function UploadContentWin({title, content, close, refreceToken, f
         close();
         setreponse(null)
     }
-    const languagesum = [];
-    Object.keys(content[0]).map((key) => languagesum.push(key));
     return (
         <div>
             {reponse === null
@@ -93,9 +82,9 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                                 <tr>
                                     {content !== null
                                         ?
-                                        Object.keys(content[0]).map((key) =>
-                                            <th key={key}
-                                                className={key === 'id' ? 'titleIdstyle' : 'titlestyle'}>{key}</th>
+                                        languageTitle.map((item) =>
+                                            <th key={item}
+                                                className={item === 'id' ? 'titleIdstyle' : 'titlestyle'}>{item}</th>
                                         )
                                         : null}
                                 </tr>
@@ -104,9 +93,9 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                                 ?
                                 content.map((item) =>
                                     <tr key={item.id} className='trcontent'>
-                                        {languagesum.map((key) =>
+                                        {languageTitle.map((key) =>
                                             <td className={key === 'id' ? 'tdIdwidth' : 'tdwidth'}
-                                                key={key}>{item[key] === null ? 'No content' : item[key]}</td>
+                                                key={key}>{item[key] === null || item[key] === undefined ? 'No content' : item[key]}</td>
                                         )}
                                     </tr>
                                 )

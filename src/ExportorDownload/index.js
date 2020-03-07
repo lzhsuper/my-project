@@ -7,7 +7,7 @@ import {green} from '@material-ui/core/colors';
 import XLSX from 'xlsx';
 import {message, Upload} from 'antd';
 
-export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setuploadname, result_message}) {
+export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setuploadname, result_message, setuploadtitle}) {
     // const theme = createMuiTheme();
     const [File, SetFile] = useState(null);
     const DownLoadButton = withStyles(theme => ({
@@ -23,7 +23,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
         root: {
 //    color: theme.palette.getContrastText(green[500]),
             backgroundColor: green[700],
-            width:140,
+            width: 140,
             '&:hover': {
                 backgroundColor: green[900],
             },
@@ -43,12 +43,28 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                 const workbook = XLSX.read(result, {type: 'binary'});
                 // 存储获取到的数据
                 let data = [];
+                //存储表头
+                const languageTitle = [];
+                let exceltitle = [];
+                let sheetspage = [];
+                for (const sheetpage in workbook.Sheets) {
+                    sheetspage.push(sheetpage)
+                }
+                Object.keys(workbook.Sheets[sheetspage[0]]).map((key) => {
+                    if (Number(key.slice(1, )) <= 1) {
+                        exceltitle.push(key);
+                    }
+                });
+                exceltitle.map((key) => languageTitle.push(workbook.Sheets[sheetspage[0]][key].v));
+                setuploadtitle(languageTitle);
+                // workbook.Sheets[file.name.splice(0,-5)]
+
                 // 遍历每张工作表进行读取（这里默认只读取第一张表）
                 for (const sheet in workbook.Sheets) {
                     if (workbook.Sheets.hasOwnProperty(sheet)) {
                         // 利用 sheet_to_json 方法将 excel 转成 json 数据
                         data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
-                        // break; // 如果只取第一张表，就取消注释这行
+                        break; // 如果只取第一张表，就取消注释这行
                     }
                 }
                 // 最终获取到并且格式化后的 json 数据
