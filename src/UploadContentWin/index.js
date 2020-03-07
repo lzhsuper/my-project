@@ -35,14 +35,14 @@ export default function UploadContentWin({title, content, close, refreceToken, f
     const submit = () => {
         let contentup = JSON.stringify(content);
         // console.log(contentup.match(/(\")\w*(\"\:)/g)[0]);
-        contentup = contentup.replace(/\"en\":/g, "en:");
-        contentup = contentup.replace(/\"es\":/g, "es:");
-        contentup = contentup.replace(/\"ko\":/g, "ko:");
-        contentup = contentup.replace(/\"ja\":/g, "ja:");
-        contentup = contentup.replace(/\"sk\":/g, "sk:");
-        contentup = contentup.replace(/\"cs\":/g, "cs:");
-        contentup = contentup.replace(/\"fr\":/g, "fr:");
-        contentup = contentup.replace(/\"id\":/g, "id:");
+        contentup = contentup.replace(/"en":/g, "en:");
+        contentup = contentup.replace(/"es":/g, "es:");
+        contentup = contentup.replace(/"ko":/g, "ko:");
+        contentup = contentup.replace(/"ja":/g, "ja:");
+        contentup = contentup.replace(/"sk":/g, "sk:");
+        contentup = contentup.replace(/"cs":/g, "cs:");
+        contentup = contentup.replace(/"fr":/g, "fr:");
+        contentup = contentup.replace(/"id":/g, "id:");
         const client = new ApolloClient({
             uri: HOST,
             headers: {

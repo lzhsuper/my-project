@@ -17,7 +17,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import HOST from '../settingurl';
 
-const useStyles = makeS tyles(theme => ({
+const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
             backgroundColor: theme.palette.common.white,
