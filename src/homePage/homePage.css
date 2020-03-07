@@ -13,10 +13,7 @@
     height: 8%;
     background-color: rgba(92, 119, 255, 0);
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 .homepagetitle_change {
     position: fixed;
     z-index: 99;
@@ -131,11 +128,7 @@
 .languageUI {
     position: absolute;
     z-index: 1;
-<<<<<<< HEAD
     left: 570px;
-=======
-    left: 300px;
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     /*width: 45%;*/
     height: 70%;
     top: 33%;
@@ -175,10 +168,7 @@
     height: 27px;
     background-color: white;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 .table_tr_addnew {
     position: relative;
     z-index: 1;
@@ -186,10 +176,7 @@
     height: 27px;
     background-color: rgba(218, 255, 222, 0.74);
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 td.width {
     position: relative;
     z-index: 1;
@@ -198,8 +185,6 @@ td.width {
     word-break: break-all;
     text-align: left;
 }
-<<<<<<< HEAD
-
 /*td.width_newadd {*/
 /*position: relative;*/
 /*z-index: 1;*/
@@ -208,16 +193,6 @@ td.width {
 /*word-break: break-all;*/
 /*text-align: left;*/
 /*color: green;*/
-=======
-/*td.width_newadd {*/
-    /*position: relative;*/
-    /*z-index: 1;*/
-    /*width: 14%;*/
-    /*border-left: 2px dotted rgba(75, 75, 75, 0.1);*/
-    /*word-break: break-all;*/
-    /*text-align: left;*/
-    /*color: green;*/
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 /*}*/
 td.width_edit {
     position: relative;
@@ -277,11 +252,7 @@ td.width_edit {
     /*float: left;*/
     position: absolute;
     width: 70px;
-<<<<<<< HEAD
     height: 100%;
-=======
-    height:100%;
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     left: 25%;
     /*top: -13%;*/
 }
@@ -330,35 +301,23 @@ img {
     outline: none;
 }
 
-<<<<<<< HEAD
 .searchinput {
-=======
-.searchinput{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: absolute;
     z-index: 1;
     width: 13%;
     right: 6%;
     top: 25%;
 }
-<<<<<<< HEAD
 
 .radiolocation {
-=======
-.radiolocation{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: absolute;
     z-index: 1;
     left: 1.2%;
     height: 100%;
     top: 3%;
 }
-<<<<<<< HEAD
 
 .selectlanguage {
-=======
-.selectlanguage{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: relative;
     z-index: 1;
     height: 8%;
@@ -366,12 +325,8 @@ img {
     background-color: rgba(241, 241, 241, 0.77);
     border-top: 1px dotted rgba(118, 118, 118, 0.24);
 }
-<<<<<<< HEAD
 
 .edit {
-=======
-.edit{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: relative;
     z-index: 1;
     margin: auto;
@@ -379,47 +334,31 @@ img {
     height: 23px;
     cursor: pointer;
 }
-<<<<<<< HEAD
 
 .newmessage {
-=======
-.newmessage{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: relative;
     z-index: 1;
     width: 80%;
     height: 10%;
     background-color: rebeccapurple;
 }
-<<<<<<< HEAD
 
 .contentcolor {
     color: green;
 }
 
 .addlanguage {
-=======
-.contentcolor{
-    color: green;
-}
-.addlanguage{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: absolute;
     top: 33%;
     left: 10px;
 }
-<<<<<<< HEAD
 
 .ifMoreLoading {
-=======
-.ifMoreLoading{
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     position: relative;
     width: 90px;
     height: 90px;
     bottom: 30%;
     left: 27%;
-<<<<<<< HEAD
 }
 
 .Upload {
@@ -441,6 +380,4 @@ img {
     left: 17%;
     height: 100%;
     top: 3%;
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 }

@@ -79,11 +79,7 @@ export default function EditWindow({title, fun, projectfrom, seterror}) {
 
     function testtext(value) {
         const regEn = /[`~;[\]]/im,
-<<<<<<< HEAD
-            regCn = /[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[\]]/im;
-=======
-            regCn = /[¡¤£¡£¤£¨¡ª¡ª£©£º£»¡°¡±¡®¡¢£¬|¡¶¡£¡·£¿¡¢¡¾¡¿[\]]/im;
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
+            regCn = /[????????????????????????????|??????????????[\]]/im;
         if (regEn.test(value) || regCn.test(value)) {
             return false;
         } else {

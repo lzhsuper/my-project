@@ -6,26 +6,16 @@ import ApolloClient from 'apollo-boost'
 import {gql} from 'apollo-boost'
 import PopupWindow from '../Popup window'
 import EditWindow from '../EditWindow'
-<<<<<<< HEAD
 import ExportOrDownload from '../ExportorDownload'
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {styled} from '@material-ui/core/styles';
 import AddLanguage from '../AddLanguage';
 import HOST from '../settingurl';
-<<<<<<< HEAD
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import CometoTop from '../CometoTop';
 import UploadContentWin from '../UploadContentWin'
-=======
-// import {compose, spacing, palette} from '@material-ui/system';
-import MenuItem from '@material-ui/core/MenuItem';
-import Checkbox from '@material-ui/core/Checkbox';
-import CometoTop from '../CometoTop'
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 
 function removeByValue(arr, val) {
     for (var i = 0; i < arr.length; i++) {
@@ -60,11 +50,8 @@ function findlanguage(arr, val) {
     }
 }
 
-<<<<<<< HEAD
 const status = [{value: 'ALL'}, {value: 'NEW'}, {value: 'UPDATE'}, {value: 'CHANGE'}];
 
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 class Homepage extends Component {
     constructor(props) {
         super(props);
@@ -90,12 +77,9 @@ class Homepage extends Component {
             finallerror: null,
             ifMoreloading: false,
             severpass: true,
-<<<<<<< HEAD
             status: 'ALL',
             uploadcontent: null,
             uploadfilename: null,
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
         };
         this.projectselect = this.projectselect.bind(this);
         this.changejectselect = this.changejectselect.bind(this);
@@ -113,7 +97,6 @@ class Homepage extends Component {
         this.setfinallerror = this.setfinallerror.bind(this);
         this.refreceToken = this.refreceToken.bind(this);
         this.severpass = this.severpass.bind(this);
-<<<<<<< HEAD
         this.changestatus = this.changestatus.bind(this);
         this.changeuploadcontent = this.changeuploadcontent.bind(this);
         this.ifUploadWinClose = this.ifUploadWinClose.bind(this);
@@ -130,22 +113,16 @@ class Homepage extends Component {
 
     changeuploadcontent(even) {
         this.setState({uploadcontent: even})
-=======
-
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     }
 
     changejectselect(event) {
         this.setState({project_select: event.target.value});
     }
 
-<<<<<<< HEAD
     changestatus(event) {
         this.setState({status: event.target.value});
     }
 
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     quit(iftrue) {
         if (iftrue === true) {
             this.setState({ifquit: true})
@@ -215,7 +192,6 @@ class Homepage extends Component {
         });
         client.query({
             query: gql`{
-<<<<<<< HEAD
                 projects{
                     id
                     name
@@ -224,16 +200,6 @@ class Homepage extends Component {
         })
         .then(reponse => this.setState({result: reponse.data.projects}))
         .catch(error => this.refreceToken(this.projectselect, error))
-=======
-                           projects{
-                           id
-                           name
-                           }
-                       }`
-        })
-            .then(reponse => this.setState({result: reponse.data.projects}))
-            .catch(error => this.refreceToken(this.projectselect, error))
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     }
 
     setloginforward() {
@@ -297,7 +263,6 @@ class Homepage extends Component {
         });
         client.query({
             query:
-<<<<<<< HEAD
             gql`{
                 language(page: 0, pageSize:25, projectId:${this.state.project_select}, search:${this.state.search}, statusType: ${this.state.status})
                 {
@@ -311,21 +276,6 @@ class Homepage extends Component {
             ifMore: reponse.data.language.length === 25
         }))
         .catch(error => this.refreceToken(this.submitSearch, error))
-=======
-                gql`{
-                            language(page: 0, pageSize:25, projectId:${this.state.project_select}, search:${this.state.search})
-                            {
-                                ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr id status
-                                
-                            }
-                        }`
-        })
-            .then(reponse => this.setState({
-                result_message: [reponse.data.language],
-                ifMore: reponse.data.language.length === 25
-            }))
-            .catch(error => this.refreceToken(this.submitSearch, error))
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
         // const content = this.state.result_message;
     }
 
@@ -350,7 +300,6 @@ class Homepage extends Component {
         });
         client.query({
             query:
-<<<<<<< HEAD
             gql`{
                 language(page: ${this.state.page}, pageSize:25, projectId:${this.state.project_select},search:${this.state.search},statusType: ${this.state.status})
                 {
@@ -361,18 +310,6 @@ class Homepage extends Component {
         })
         .then(reponse => this.addresultmessage(reponse))
         .catch(error => this.refreceToken(this.LetMore, error))
-=======
-                gql`{
-                            language(page: ${this.state.page}, pageSize:25, projectId:${this.state.project_select},search:${this.state.search})
-                            {
-                                ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr id status
-                                
-                            }
-                        }`
-        })
-            .then(reponse => this.addresultmessage(reponse))
-            .catch(error => this.refreceToken(this.LetMore, error))
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
     }
 
     addresultmessage(reponse) {
@@ -429,8 +366,7 @@ class Homepage extends Component {
             contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/"/g, "\\\"");
         });
         client.mutate({
-            mutation: gql`
-<<<<<<< HEAD
+            mutation: gql`                
                 mutation update{
                     updateLang(lang:{id:${contentnew[0].id},
                         en:"${contentnew[0].new_en}",
@@ -448,25 +384,6 @@ class Homepage extends Component {
         })
         .then(reponse => this.ifreponsesuccess(reponse))
         .catch(error => this.refreceToken(this.submit, error));
-=======
-            mutation test{
-                   updateLang(lang:{id:${contentnew[0].id},
-                    en:"${contentnew[0].new_en}",
-                    es:"${contentnew[0].new_es}",
-                    ko:"${contentnew[0].new_ko}",
-                    ja:"${contentnew[0].new_ja}",
-                    sk:"${contentnew[0].new_sk}",
-                    cs:"${contentnew[0].new_cs}",
-                    fr:"${contentnew[0].new_fr}"
-                     })
-                    {
-                         id
-                    }
-            }`
-        })
-            .then(reponse => this.ifreponsesuccess(reponse))
-            .catch(error => this.refreceToken(this.submit, error));
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
 
     };
 
@@ -492,20 +409,12 @@ class Homepage extends Component {
 
     setfinallerror(result, error, action) {
         if (result) {
-<<<<<<< HEAD
-            console.log('11111111')
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
             cookie.remove('tokenaccessToken');
             cookie.remove('refreshToken');
             cookie.save('tokenaccessToken', result.data.refreshToken.accessToken);
             cookie.save('refreshToken', result.data.refreshToken.refreshToken);
             action()
         } else if (error) {
-<<<<<<< HEAD
-            console.log('22222222')
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
             this.setState({
                 finallerror: error.message
             })
@@ -518,8 +427,7 @@ class Homepage extends Component {
                 uri: HOST,
             });
             client.query({
-                query: gql`
-<<<<<<< HEAD
+                query: gql`                    
                     {
                         refreshToken(token:"${cookie.load('refreshToken')}"){
                             accessToken
@@ -529,17 +437,6 @@ class Homepage extends Component {
             })
             .then(result => this.setfinallerror(result, false, action))
             .catch(error => this.setfinallerror(false, error, action))
-=======
-            {
-            refreshToken(token:"${cookie.load('refreshToken')}"){
-            accessToken
-            refreshToken
-            }}
-            `
-            })
-                .then(result => this.setfinallerror(result, false, action))
-                .catch(error => this.setfinallerror(false, error, action))
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
         } else {
             if (settosubmit) {
                 settosubmit(true);
@@ -557,11 +454,7 @@ class Homepage extends Component {
                 ?
                 this.state.finallerror !== null
                     ?
-<<<<<<< HEAD
                     this.state.finallerror.slice(15, 32) === 'CODE_TOKEN_EXPIRE'
-=======
-                    this.state.finallerror.slice(15, 32) === 'refres token fail'
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
                         ?
                         !this.state.iflogin_forward
                             ?
@@ -618,7 +511,6 @@ class Homepage extends Component {
                                         </MySelect>
                                     </div>
                                     : null}
-<<<<<<< HEAD
                                 <div className='LanguageStatus'>
                                     <MySelect
                                         id="status"
@@ -635,8 +527,6 @@ class Homepage extends Component {
                                         ))}
                                     </MySelect>
                                 </div>
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
                                 <div className='languageUI'>
                                     <div className='selectone'><label/></div>
                                     <div className='selectone'><Checkbox type='checkbox' name='lanuage_all' value='all'
@@ -702,7 +592,6 @@ class Homepage extends Component {
                                     Add Language
                                 </Button>
                             </div>
-<<<<<<< HEAD
                             <div className="export">
                                 <ExportOrDownload result={this.state.result_message} ifselect='export'
                                                   SetHomeUpload={this.changeuploadcontent}
@@ -713,8 +602,6 @@ class Homepage extends Component {
                                                   SetHomeUpload={this.changeuploadcontent}
                                                   setuploadname={this.setuploadname} result_message={this.state.result_message}/>
                             </div>
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
                         </div>
                         {this.state.result_message === null || this.state.result_message[0].length === 0 || (this.state.result_message[0][0] && this.state.result_message[0][0].project_id) || false
                             ?
@@ -868,7 +755,6 @@ class Homepage extends Component {
                                          top={this.state.scrollY}
                                          gologin={this.setloginforward} seterror={this.refreceToken}/> : null
                         }
-<<<<<<< HEAD
                         {
                             this.state.uploadcontent !== null ?
                                 <div>
@@ -876,8 +762,6 @@ class Homepage extends Component {
                                                       close={this.ifUploadWinClose} refreceToken={this.refreceToken} filename={this.state.uploadfilename}/>
                                 </div> : null
                         }
-=======
->>>>>>> fd9b9da99fa174080322a35963e957ed7dcd9960
                     </div>
                 : <PopupWindow oneselect={1} title='Sever Error'
                                content='Server failure, please refresh and try again later'
