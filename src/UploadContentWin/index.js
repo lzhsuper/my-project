@@ -34,6 +34,7 @@ export default function UploadContentWin({title, content, close, refreceToken, f
         contentup = contentup.replace(/"cs":/g, "cs:");
         contentup = contentup.replace(/"fr":/g, "fr:");
         contentup = contentup.replace(/"id":/g, "id:");
+        console.log(contentup);
         const client = new ApolloClient({
             uri: HOST,
             headers: {
