@@ -182,6 +182,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                         SetFile([file]);
                         return false;
                     }}
+                    showUploadList={false}
                 >
                     <UploadButton fullWidth
                                   color="secondary"
