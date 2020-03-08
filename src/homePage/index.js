@@ -445,7 +445,7 @@ class Homepage extends Component {
             if (settosubmit) {
                 settosubmit(true);
                 setloading(false);
-                action('');
+                // action('');
             } else {
                 this.setState({severpass: false})
             }

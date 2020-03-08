@@ -52,11 +52,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditWindow({title, fun, projectfrom, seterror}) {
+export default function AddLanguage({title, fun, projectfrom, seterror}) {
     const classes = useStyles();
     const [English, setEnglish] = useState('');
     const [projectId, setprojectId] = useState(projectfrom);
-    const [transResult, settransResult] = useState(null);
+    const [transResult, settransResult] = useState({data:{trans:{en:"",es:"",ko:"",ja:"",sk:"",cs:"",fr:""}}});
     const [tosubmit, settosubmit] = useState(false);
     const [result, setresult] = useState(null);
     const [nullable, setnullable] = useState(false);
@@ -92,7 +92,6 @@ export default function EditWindow({title, fun, projectfrom, seterror}) {
         if (type === 'en') {
             setEnglish(value.target.value);
             transResultResult.data.trans.en = value.target.value
-
         } else if (type === 'es') {
             transResultResult.data.trans.es = value.target.value
         } else if (type === 'ja') {
