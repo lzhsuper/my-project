@@ -17,9 +17,9 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 6px; /* ×ÝÏò¹ö¶¯Ìõ*/
-    height: 5px; /* ºáÏò¹ö¶¯Ìõ */
-    background-color: #414db1;
+    width: 13px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+    height: 5px; /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
+    background-color: rgba(94, 110, 255, 0.45);
 }
 
 ::-webkit-scrollbar-track {
@@ -28,7 +28,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgb(72, 85, 194);
-    background-color: #4855c2;
-    border-radius: 20px;
+    -webkit-box-shadow: inset 0 0 6px rgba(72, 85, 194, 0.56);
+    background-color: rgba(94, 110, 255, 0.41);
+    border-radius: 5px;
 }
