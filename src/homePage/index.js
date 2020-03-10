@@ -599,12 +599,12 @@ class Homepage extends Component {
                             <div className="export">
                                 <ExportOrDownload result={this.state.result_message} ifselect='export'
                                                   SetHomeUpload={this.changeuploadcontent}
-                                                  setuploadname={this.setuploadname} result_message={this.state.result_message} setuploadtitle={this.setuploadtitle}/>
+                                                  setuploadname={this.setuploadname} setuploadtitle={this.setuploadtitle}/>
                             </div>
                             <div className="Upload">
                                 <ExportOrDownload result={this.state.result_message} ifselect='upload'
                                                   SetHomeUpload={this.changeuploadcontent}
-                                                  setuploadname={this.setuploadname} result_message={this.state.result_message} setuploadtitle={this.setuploadtitle}/>
+                                                  setuploadname={this.setuploadname} setuploadtitle={this.setuploadtitle}/>
                             </div>
                         </div>
                         {this.state.result_message === null || this.state.result_message[0].length === 0 || (this.state.result_message[0][0] && this.state.result_message[0][0].project_id) || false

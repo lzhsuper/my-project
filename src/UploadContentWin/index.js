@@ -95,7 +95,7 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                                     <tr key={item.id} className='trcontent'>
                                         {languageTitle.map((key) =>
                                             <td className={key === 'id' ? 'tdIdwidth' : 'tdwidth'}
-                                                key={key}>{item[key] === null || item[key] === undefined ? 'No content' : item[key]}</td>
+                                                key={key}>{item[key] === null || item[key] === undefined || item[key] === '' ? 'No content' : item[key]}</td>
                                         )}
                                     </tr>
                                 )

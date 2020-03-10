@@ -7,8 +7,37 @@ import {green} from '@material-ui/core/colors';
 import XLSX from 'xlsx';
 import {message, Upload} from 'antd';
 
-export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setuploadname, result_message, setuploadtitle}) {
+export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setuploadname, setuploadtitle}) {
     // const theme = createMuiTheme();
+    let result_message = null;
+    if (result !== null) {
+        result_message = JSON.parse(JSON.stringify(result));
+        result_message.map((item) => item.map((itemu) => {
+            {
+                if (itemu.new_en !== undefined && itemu.new_en !== null && itemu.new_en !== '') {
+                    itemu.en = itemu.new_en;
+                }
+                if (itemu.new_es !== undefined && itemu.new_es !== null && itemu.new_es !== '') {
+                    itemu.es = itemu.new_es;
+                }
+                if (itemu.new_ko !== undefined && itemu.new_ko !== null && itemu.new_ko !== '') {
+                    itemu.ko = itemu.new_ko;
+                }
+                if (itemu.new_ja !== undefined && itemu.new_ja !== null && itemu.new_ja !== '') {
+                    itemu.ja = itemu.new_ja;
+                }
+                if (itemu.new_sk !== undefined && itemu.new_sk !== null && itemu.new_sk !== '') {
+                    itemu.sk = itemu.new_sk;
+                }
+                if (itemu.new_fr !== undefined && itemu.new_fr !== null && itemu.new_fr !== '') {
+                    itemu.fr = itemu.new_fr;
+                }
+                if (itemu.new_cs !== undefined && itemu.new_cs !== null && itemu.new_cs !== '') {
+                    itemu.cs = itemu.new_cs;
+                }
+            }
+        }));
+    }
     const [File, SetFile] = useState(null);
     const DownLoadButton = withStyles(theme => ({
         root: {
@@ -51,7 +80,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                     sheetspage.push(sheetpage)
                 }
                 Object.keys(workbook.Sheets[sheetspage[0]]).map((key) => {
-                    if (Number(key.slice(1, )) <= 1) {
+                    if (Number(key.slice(1,)) <= 1) {
                         exceltitle.push(key);
                     }
                 });
@@ -168,7 +197,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                                 color="primary"
                                 variant="contained"
                                 endIcon={<SaveIcon/>}
-                                onClick={() => DownLoad(result)}>
+                                onClick={() => DownLoad(result_message)}>
                     Download
                 </DownLoadButton>
             </div>
