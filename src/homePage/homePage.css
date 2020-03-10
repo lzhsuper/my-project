@@ -24,7 +24,7 @@
 
 .homepageUI {
     background-color: white;
-    height: 8%;
+    height: 10%;
     position: relative;
     z-index: 2;
     margin: auto;
@@ -52,7 +52,7 @@
     z-index: 1;
     /*width: 10%;*/
     float: left;
-    padding-left: 1px;
+    padding-left: 0.5px;
 }
 
 .selectoneTop {
@@ -129,9 +129,10 @@
     position: absolute;
     z-index: 1;
     left: 570px;
-    /*width: 45%;*/
+    width: 45%;
     height: 70%;
     top: 33%;
+    /*background-color: white;*/
 }
 
 .languagenodata {
@@ -320,7 +321,7 @@ img {
 .selectlanguage {
     position: relative;
     z-index: 1;
-    height: 8%;
+    height: 10%;
     width: 100%;
     background-color: rgba(241, 241, 241, 0.77);
     border-top: 1px dotted rgba(118, 118, 118, 0.24);
