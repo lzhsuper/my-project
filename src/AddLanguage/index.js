@@ -66,26 +66,26 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
     const [modelname, setmodelname] = useState('app');
 
     function ChangeEnglish(value) {
-        if (!testtext(value.target.value)) {
-            setloading(true);
-            setenglisherror(true);
-        } else {
-            setenglisherror(false);
-            setloading(false)
-        }
+        // if (!testtext(value.target.value)) {
+        //     setloading(true);
+        //     setenglisherror(true);
+        // } else {
+        //     setenglisherror(false);
+        //     setloading(false)
+        // }
         value = value.target.value;
         setEnglish(value);
     }
 
-    function testtext(value) {
-        const regEn = /[`~;[\]]/im,
-            regCn = /[????????????????????????????|??????????????[\]]/im;
-        if (regEn.test(value) || regCn.test(value)) {
-            return false;
-        } else {
-            return true
-        }
-    }
+    // function testtext(value) {
+    //     const regEn = /[`~;[\]]/im,
+    //         regCn = /[????????????????????????????|??????????????[\]]/im;
+    //     if (regEn.test(value) || regCn.test(value)) {
+    //         return false;
+    //     } else {
+    //         return true
+    //     }
+    // }
 
     function Changelanguage(value, type) {
         const transResultResult = JSON.parse(JSON.stringify(transResult));
