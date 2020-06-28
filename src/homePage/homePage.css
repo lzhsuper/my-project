@@ -128,7 +128,7 @@
 .languageUI {
     position: absolute;
     z-index: 1;
-    left: 570px;
+    left: 370px;
     width: 45%;
     height: 70%;
     top: 33%;
@@ -186,15 +186,25 @@ td.width {
     word-break: break-all;
     text-align: left;
 }
+
 /*td.width_newadd {*/
+
 /*position: relative;*/
+
 /*z-index: 1;*/
+
 /*width: 14%;*/
+
 /*border-left: 2px dotted rgba(75, 75, 75, 0.1);*/
+
 /*word-break: break-all;*/
+
 /*text-align: left;*/
+
 /*color: green;*/
+
 /*}*/
+
 td.width_edit {
     position: relative;
     z-index: 1;
@@ -229,11 +239,6 @@ td.width_edit {
 }
 
 .Logo {
-    position: absolute;
-    /*width: 1%;*/
-    height: 10%;
-    left: 1%;
-    top: 25%;
     font-size: 25px;
     color: white;
 }
@@ -250,11 +255,11 @@ td.width_edit {
 }
 
 .personalimage {
+    position: relative;
     /*float: left;*/
-    position: absolute;
     width: 70px;
     height: 100%;
-    left: 25%;
+    left: 20px
     /*top: -13%;*/
 }
 
@@ -264,18 +269,12 @@ img {
 }
 
 .username {
-    position: absolute;
+    position: relative;
     /*float: left;*/
-    left: 58%;
-    top: 35%;
 }
 
 .shuxian {
     position: relative;
-    left: 88%;
-    top: 33%;
-    /*float: left;*/
-    /*padding-left: 20px;*/
     height: 30px;
     width: 0;
     border-radius: 100px;
@@ -283,9 +282,7 @@ img {
 }
 
 .loginquit {
-    position: absolute;
-    top: 39%;
-    right: -10%;
+    position: relative;
     font-size: 18px;
 }
 
@@ -313,7 +310,7 @@ img {
 .radiolocation {
     position: absolute;
     z-index: 1;
-    left: 1.2%;
+    left: 10px;
     height: 100%;
     top: 3%;
 }
@@ -378,7 +375,7 @@ img {
 .LanguageStatus {
     position: absolute;
     z-index: 1;
-    left: 17%;
+    left: 180px;
     height: 100%;
     top: 3%;
 }

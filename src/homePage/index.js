@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import CometoTop from '../CometoTop';
 import UploadContentWin from '../UploadContentWin'
+import { Grid } from '@material-ui/core'
 
 function removeByValue(arr, val) {
     for (var i = 0; i < arr.length; i++) {
@@ -39,7 +40,7 @@ const MySelect = styled(TextField)({
     '& label': {
         fontSize: '20px'
     },
-    '& div': { width: '250px' }
+    '& div': { width: '150px' }
 });
 
 function findlanguage(arr, val) {
@@ -487,31 +488,46 @@ class Homepage extends Component {
                     : <div className='homepage'>
                         <div className='homepagetitle'>
                             <div className='homepagetitle_change'>
-                                <div className='Logo'><span><b>TappLock</b></span></div>
-                                <div className='personal'>
-                                    <div className='personalimage'><img src={require('./images/admin.png')}
-                                        alt="" />
-                                    </div>
-                                    <div className='username'> Admin</div>
-                                    <div className='shuxian' />
-                                    <div className='loginquit'><span onClick={() => this.quit(true)}
-                                        className='quitcontent'>Logout</span></div>
-                                </div>
+                                <Grid container justify='space-between' alignItems='center' style={{ position: 'relative', height: '100%', left: 10, bottom: 5 }}>
+                                    <Grid item >
+                                        <div className='Logo'><span><b>TappLock</b></span></div>
+                                    </Grid>
+                                    <Grid item lg={3} md={4} xs={6}>
+                                        <Grid container alignItems='center' spacing={2} justify='flex-end' style={{paddingRight:50}}>
+                                            <Grid item>
+                                                <div className='personalimage'><img src={require('./images/admin.png')}
+                                                    alt="" />
+                                                </div>
+                                            </Grid>
+                                            <Grid item style={{ color: 'white' }}>Admin</Grid>
+                                            <Grid item>
+                                                <div className='shuxian' />
+                                            </Grid>
+                                            <Grid item>
+                                                <div className='loginquit'><span onClick={() => this.quit(true)}
+                                                    className='quitcontent' style={{ color: 'white' }}>Logout</span>
+                                                </div>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </div>
                         </div>
-                        {this.state.ifquit ?
-                            this.state.quitsure === 'sure'
-                                ?
-                                <Router><Redirect to="/login" /></Router>
-                                :
-                                <PopupWindow title='Log out' content='Are you sure you want to log out ?' fun={this.quit} />
-                            : this.state.nosearch
-                                ?
-                                <PopupWindow oneselect={1} title='Selected' content='Please select project and language .'
-                                    fun={() => {
-                                        this.selectedone(true)
-                                    }} surebutton='I konwn' />
-                                : null}
+                        {
+                            this.state.ifquit ?
+                                this.state.quitsure === 'sure'
+                                    ?
+                                    <Router><Redirect to="/login" /></Router>
+                                    :
+                                    <PopupWindow title='Log out' content='Are you sure you want to log out ?' fun={this.quit} />
+                                : this.state.nosearch
+                                    ?
+                                    <PopupWindow oneselect={1} title='Selected' content='Please select project and language .'
+                                        fun={() => {
+                                            this.selectedone(true)
+                                        }} surebutton='I konwn' />
+                                    : null
+                        }
                         <div className='homepageUI'>
                             <div className='object_location'>
                                 {this.state.result ?
@@ -548,7 +564,28 @@ class Homepage extends Component {
                                         ))}
                                     </MySelect>
                                 </div>
-                                <div className='languageUI'>
+                                
+                                <div className='searchinput'>
+                                    <MyTextField
+                                        onKeyUp={e => this.search(e)}
+                                        id="outlined-search"
+                                        label="Search field"
+                                        type="search"
+                                        margin="dense"
+                                        variant="outlined"
+                                        onChange={(search) => this.changeSearch(search)}
+                                    />
+                                </div>
+                                <div className='searchclick'>
+                                    <Button fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => this.submitSearch()}>
+                                        Search
+                                    </Button>
+                                </div>
+                            </div>
+                            <div className='languageUI'>
                                     <div className='selectone'><label />
                                     </div>
                                     <div className='selectone'>
@@ -599,26 +636,6 @@ class Homepage extends Component {
                                         <label>Portuguese</label>
                                     </div>
                                 </div>
-                                <div className='searchinput'>
-                                    <MyTextField
-                                        onKeyUp={e => this.search(e)}
-                                        id="outlined-search"
-                                        label="Search field"
-                                        type="search"
-                                        margin="dense"
-                                        variant="outlined"
-                                        onChange={(search) => this.changeSearch(search)}
-                                    />
-                                </div>
-                                <div className='searchclick'>
-                                    <Button fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={() => this.submitSearch()}>
-                                        Search
-                                    </Button>
-                                </div>
-                            </div>
                         </div>
                         <div className='selectlanguage'>
                             <div className="addlanguage">
@@ -640,169 +657,175 @@ class Homepage extends Component {
                                     setuploadname={this.setuploadname} setuploadtitle={this.setuploadtitle} search={this.submitSearch} />
                             </div>
                         </div>
-                        {this.state.result_message === null || this.state.result_message[0].length === 0 || (this.state.result_message[0][0] && this.state.result_message[0][0].project_id) || false
-                            ?
-                            <div className='languagenodata'>No data</div>
-                            :
-                            <div className="contenttext">
-                                <table className='contenttexttable'>
-                                    <tbody>
-                                        <tr>
-                                            {this.state.languageinclude && this.state.languageinclude.includes('en')
-                                                ?
-                                                <th className='thstyle'><h2>en</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('es')
-                                                ?
-                                                <th className='thstyle'><h2>es</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('ko')
-                                                ?
-                                                <th className='thstyle'><h2>ko</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('ja')
-                                                ?
-                                                <th className='thstyle'><h2>ja</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('sk')
-                                                ?
-                                                <th className='thstyle'><h2>sk</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('cs')
-                                                ?
-                                                <th className='thstyle'><h2>cs</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('fr')
-                                                ?
-                                                <th className='thstyle'><h2>fr</h2></th> : null}
-                                            {this.state.languageinclude && this.state.languageinclude.includes('pt')
-                                                ?
-                                                <th className='thstyle'><h2>pt</h2></th> : null}
-                                            <th className='thstyle'><h2>Editor</h2></th>
-                                        </tr>
-                                        {
-                                            this.state.result_message.map((item) =>
-                                                item.map((item_content) =>
-                                                    <tr className={item_content.status === 2 ? 'table_tr_addnew' : 'table_tr'}
-                                                        key={item_content.id}>
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('en') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.en === '' || item_content.en === null ? 'No content' : item_content.en}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_en !== null ? item_content.new_en : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('es') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p> {item_content.es === null || item_content.es === '' ? 'No content' : item_content.es}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_es !== null ? item_content.new_es : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('ko') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p> {item_content.ko === null || item_content.ko === '' ? 'No content' : item_content.ko}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_ko !== null ? item_content.new_ko : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('ja') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.ja === null || item_content.ja === '' ? 'No content' : item_content.ja}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_ja !== null ? item_content.new_ja : null}</p>
-                                                                </div>
+                        {
+                            this.state.result_message === null || this.state.result_message[0].length === 0 || (this.state.result_message[0][0] && this.state.result_message[0][0].project_id) || false
+                                ?
+                                <div className='languagenodata'>No data</div>
+                                :
+                                <div className="contenttext">
+                                    <table className='contenttexttable'>
+                                        <tbody>
+                                            <tr>
+                                                {this.state.languageinclude && this.state.languageinclude.includes('en')
+                                                    ?
+                                                    <th className='thstyle'><h2>en</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('es')
+                                                    ?
+                                                    <th className='thstyle'><h2>es</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('ko')
+                                                    ?
+                                                    <th className='thstyle'><h2>ko</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('ja')
+                                                    ?
+                                                    <th className='thstyle'><h2>ja</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('sk')
+                                                    ?
+                                                    <th className='thstyle'><h2>sk</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('cs')
+                                                    ?
+                                                    <th className='thstyle'><h2>cs</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('fr')
+                                                    ?
+                                                    <th className='thstyle'><h2>fr</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('pt')
+                                                    ?
+                                                    <th className='thstyle'><h2>pt</h2></th> : null}
+                                                <th className='thstyle'><h2>Editor</h2></th>
+                                            </tr>
+                                            {
+                                                this.state.result_message.map((item) =>
+                                                    item.map((item_content) =>
+                                                        <tr className={item_content.status === 2 ? 'table_tr_addnew' : 'table_tr'}
+                                                            key={item_content.id}>
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('en') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.en === '' || item_content.en === null ? 'No content' : item_content.en}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_en !== null ? item_content.new_en : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('es') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p> {item_content.es === null || item_content.es === '' ? 'No content' : item_content.es}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_es !== null ? item_content.new_es : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('ko') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p> {item_content.ko === null || item_content.ko === '' ? 'No content' : item_content.ko}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_ko !== null ? item_content.new_ko : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('ja') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.ja === null || item_content.ja === '' ? 'No content' : item_content.ja}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_ja !== null ? item_content.new_ja : null}</p>
+                                                                    </div>
+                                                                </td>
+                                                                : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('sk') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.sk === null || item_content.sk === '' ? 'No content' : item_content.sk}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_sk !== null ? item_content.new_sk : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('cs') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.cs === null || item_content.cs === '' ? 'No content' : item_content.cs}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_cs !== null ? item_content.new_cs : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('fr') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.fr === null || item_content.fr === '' ? 'No content' : item_content.fr}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_fr !== null ? item_content.new_fr : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('pt') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.pt === null || item_content.pt === '' ? 'No content' : item_content.pt}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_pt !== null ? item_content.new_pt : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            <td className='width_edit'>
+                                                                <div className='edit'
+                                                                    onClick={() => this.editon(true, item_content.id)}><img
+                                                                        src={require('./images/edit.png')} alt="edit language" /></div>
                                                             </td>
-                                                            : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('sk') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.sk === null || item_content.sk === '' ? 'No content' : item_content.sk}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_sk !== null ? item_content.new_sk : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('cs') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.cs === null || item_content.cs === '' ? 'No content' : item_content.cs}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_cs !== null ? item_content.new_cs : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('fr') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.fr === null || item_content.fr === '' ? 'No content' : item_content.fr}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_fr !== null ? item_content.new_fr : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        {this.state.languageinclude && this.state.languageinclude.includes('pt') ?
-                                                            <td className='width'>
-                                                                <div>
-                                                                    <p>{item_content.pt === null || item_content.pt === '' ? 'No content' : item_content.pt}</p>
-                                                                </div>
-                                                                <div>
-                                                                    <p className='contentcolor'>{item_content.new_pt !== null ? item_content.new_pt : null}</p>
-                                                                </div>
-                                                            </td> : null}
-                                                        <td className='width_edit'>
-                                                            <div className='edit'
-                                                                onClick={() => this.editon(true, item_content.id)}><img
-                                                                    src={require('./images/edit.png')} alt="edit language" /></div>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                    </tbody>
-                                </table>
-                                <div className='letmorebox'>
-                                    {this.state.ifMore
-                                        ?
-                                        !this.state.ifMoreloading
+                                                        </tr>
+                                                    ))}
+                                        </tbody>
+                                    </table>
+                                    <div className='letmorebox'>
+                                        {this.state.ifMore
                                             ?
-                                            <Button fullWidth
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={this.LetMore}>
-                                                Load More...</Button>
-                                            : <div className='ifMoreLoading'>
-                                                <svg x="0px" y="0px"
-                                                    viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
-                                                    <path fill="black"
-                                                        d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                                                        <animateTransform
-                                                            attributeName="transform"
-                                                            attributeType="XML"
-                                                            type="rotate"
-                                                            dur="1s"
-                                                            from="0 50 50"
-                                                            to="360 50 50"
-                                                            repeatCount="indefinite" />
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                        :
-                                        <div className='letmore'><span>No more message....</span></div>
-                                    }
+                                            !this.state.ifMoreloading
+                                                ?
+                                                <Button fullWidth
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={this.LetMore}>
+                                                    Load More...</Button>
+                                                : <div className='ifMoreLoading'>
+                                                    <svg x="0px" y="0px"
+                                                        viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
+                                                        <path fill="black"
+                                                            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                            <animateTransform
+                                                                attributeName="transform"
+                                                                attributeType="XML"
+                                                                type="rotate"
+                                                                dur="1s"
+                                                                from="0 50 50"
+                                                                to="360 50 50"
+                                                                repeatCount="indefinite" />
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            :
+                                            <div className='letmore'><span>No more message....</span></div>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
                         }
-                        {this.state.scrollY > 1000 ?
-                            <CometoTop /> : null}
-                        {this.state.editwindow ?
-                            <EditWindow fun={this.editon} title='Edit language' language_type={this.state.language_type}
-                                submit={this.submit}
-                                content={this.state.result_message} id={this.state.id} /> : null}
-                        {this.state.addlanguage ?
-                            <AddLanguage projectfrom={this.state.project_select} fun={this.addlanguage} title='Add Language'
-                                top={this.state.scrollY}
-                                gologin={this.setloginforward} seterror={this.refreceToken} /> : null
+                        {
+                            this.state.scrollY > 1000 ?
+                                <CometoTop /> : null
+                        }
+                        {
+                            this.state.editwindow ?
+                                <EditWindow fun={this.editon} title='Edit language' language_type={this.state.language_type}
+                                    submit={this.submit}
+                                    content={this.state.result_message} id={this.state.id} /> : null
+                        }
+                        {
+                            this.state.addlanguage ?
+                                <AddLanguage projectfrom={this.state.project_select} fun={this.addlanguage} title='Add Language'
+                                    top={this.state.scrollY}
+                                    gologin={this.setloginforward} seterror={this.refreceToken} /> : null
                         }
                         {
                             this.state.uploadcontent !== null ?
@@ -812,7 +835,7 @@ class Homepage extends Component {
                                         filename={this.state.uploadfilename} languageTitle={this.state.uploadfiletitle} />
                                 </div> : null
                         }
-                    </div>
+                    </div >
                 : <PopupWindow oneselect={1} title='Sever Error'
                     content='Server failure, please refresh and try again later'
                     fun={() => {
