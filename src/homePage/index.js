@@ -382,8 +382,9 @@ class Homepage extends Component {
         });
         Object.keys(contentnew[0]).map(item => {
             contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/\\/g, '\\\\');
-            contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/"/g, "\\\"");
+            contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/\"/g, "\\\"");
         });
+        console.log(contentnew[0])
         client.mutate({
             mutation: gql`                
                 mutation update{
@@ -468,6 +469,7 @@ class Homepage extends Component {
         }
     }
     render() {
+        console.log(this.state.result_message)
         return (
             this.state.severpass === true
                 ?

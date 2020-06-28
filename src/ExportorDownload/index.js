@@ -1,50 +1,18 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import {green} from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
 import XLSX from 'xlsx';
-import {message, Upload} from 'antd';
+import { message, Upload } from 'antd';
 
-export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setuploadname, setuploadtitle}) {
+export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setuploadname, setuploadtitle, search }) {
     // const theme = createMuiTheme();
-    let result_message = null;
-    if (result !== null) {
-        result_message = JSON.parse(JSON.stringify(result));
-        result_message.map((item) => item.map((itemu) => {
-            {
-                if (itemu.new_en !== undefined && itemu.new_en !== null && itemu.new_en !== '') {
-                    itemu.en = itemu.new_en;
-                }
-                if (itemu.new_es !== undefined && itemu.new_es !== null && itemu.new_es !== '') {
-                    itemu.es = itemu.new_es;
-                }
-                if (itemu.new_ko !== undefined && itemu.new_ko !== null && itemu.new_ko !== '') {
-                    itemu.ko = itemu.new_ko;
-                }
-                if (itemu.new_ja !== undefined && itemu.new_ja !== null && itemu.new_ja !== '') {
-                    itemu.ja = itemu.new_ja;
-                }
-                if (itemu.new_sk !== undefined && itemu.new_sk !== null && itemu.new_sk !== '') {
-                    itemu.sk = itemu.new_sk;
-                }
-                if (itemu.new_fr !== undefined && itemu.new_fr !== null && itemu.new_fr !== '') {
-                    itemu.fr = itemu.new_fr;
-                }
-                if (itemu.new_cs !== undefined && itemu.new_cs !== null && itemu.new_cs !== '') {
-                    itemu.cs = itemu.new_cs;
-                }
-                if (itemu.new_pt !== undefined && itemu.new_pt !== null && itemu.new_pt !== '') {
-                    itemu.pt = itemu.new_pt;
-                }
-            }
-        }));
-    }
     const [File, SetFile] = useState(null);
     const DownLoadButton = withStyles(theme => ({
         root: {
-//    color: theme.palette.getContrastText(green[500]),
+            //    color: theme.palette.getContrastText(green[500]),
             backgroundColor: green[700],
             '&:hover': {
                 backgroundColor: green[900],
@@ -53,7 +21,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
     }))(Button);
     const UploadButton = withStyles(theme => ({
         root: {
-//    color: theme.palette.getContrastText(green[500]),
+            //    color: theme.palette.getContrastText(green[500]),
             backgroundColor: green[700],
             width: 140,
             '&:hover': {
@@ -70,9 +38,9 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
         const fileReader = new FileReader();
         fileReader.onload = event => {
             try {
-                const {result} = event.target;
+                const { result } = event.target;
                 // 以二进制流方式读取得到整份excel表格对象
-                const workbook = XLSX.read(result, {type: 'binary'});
+                const workbook = XLSX.read(result, { type: 'binary' });
                 // 存储获取到的数据
                 let data = [];
                 //存储表头
@@ -135,8 +103,40 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
         fileReader.readAsBinaryString(files);
     }
 
-    function DownLoad(data, fileName = 'LanguageEdit.xlsx') {
-        if (result_message === null) {
+    function DownLoad(fileName = 'LanguageEdit.xlsx') {
+        let data = null;
+        if (result !== null) {
+            data = JSON.parse(JSON.stringify(result));
+            data.map((item) => item.map((itemu) => {
+                {
+                    if (itemu.new_en !== undefined && itemu.new_en !== null && itemu.new_en !== '') {
+                        itemu.en = itemu.new_en;
+                    }
+                    if (itemu.new_es !== undefined && itemu.new_es !== null && itemu.new_es !== '') {
+                        itemu.es = itemu.new_es;
+                    }
+                    if (itemu.new_ko !== undefined && itemu.new_ko !== null && itemu.new_ko !== '') {
+                        itemu.ko = itemu.new_ko;
+                    }
+                    if (itemu.new_ja !== undefined && itemu.new_ja !== null && itemu.new_ja !== '') {
+                        itemu.ja = itemu.new_ja;
+                    }
+                    if (itemu.new_sk !== undefined && itemu.new_sk !== null && itemu.new_sk !== '') {
+                        itemu.sk = itemu.new_sk;
+                    }
+                    if (itemu.new_fr !== undefined && itemu.new_fr !== null && itemu.new_fr !== '') {
+                        itemu.fr = itemu.new_fr;
+                    }
+                    if (itemu.new_cs !== undefined && itemu.new_cs !== null && itemu.new_cs !== '') {
+                        itemu.cs = itemu.new_cs;
+                    }
+                    if (itemu.new_pt !== undefined && itemu.new_pt !== null && itemu.new_pt !== '') {
+                        itemu.pt = itemu.new_pt;
+                    }
+                }
+            }));
+        }
+        if (data === null) {
             return
         }
         const initColumn = [];
@@ -146,7 +146,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
             } else if (title === 'status') {
                 break
             }
-            initColumn.push({title: title, dataIndex: title, key: title})
+            initColumn.push({ title: title, dataIndex: title, key: title })
         }
         const _headers = initColumn
             .map((item, i) => Object.assign({}, {
@@ -154,7 +154,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                 title: item.title,
                 position: String.fromCharCode(65 + i) + 1
             }))
-            .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {key: next.key, v: next.title}}), {});
+            .reduce((prev, next) => Object.assign({}, prev, { [next.position]: { key: next.key, v: next.title } }), {});
         // 对刚才的结果进行降维处理（二维数组变成一维数组）
         data = data.reduce((prev, next) => prev.concat(next));
         const datanew = data
@@ -164,8 +164,8 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
             })));
         // 对刚才的结果进行降维处理（二维数组变成一维数组）
         const _data = datanew.reduce((prev, next) => prev.concat(next))
-        // 转换成 worksheet 需要的结构
-            .reduce((prev, next) => Object.assign({}, prev, {[next.position]: {v: next.content}}), {});
+            // 转换成 worksheet 需要的结构
+            .reduce((prev, next) => Object.assign({}, prev, { [next.position]: { v: next.content } }), {});
         Object.keys(_data).map((item) => _data[item].v === null ? _data[item].v = 'No content' : null);
         // 合并 headers 和 data
         const output = Object.assign({}, _headers, _data);
@@ -183,7 +183,7 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                     output,
                     {
                         '!ref': ref,
-                        '!cols': [{wpx: 45}, {wpx: 100}, {wpx: 200}, {wpx: 80}, {wpx: 150}, {wpx: 100}, {wpx: 300}, {wpx: 300}],
+                        '!cols': [{ wpx: 45 }, { wpx: 100 }, { wpx: 200 }, { wpx: 80 }, { wpx: 150 }, { wpx: 100 }, { wpx: 300 }, { wpx: 300 }],
                     },
                 ),
             },
@@ -197,10 +197,10 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
         return (
             <div>
                 <DownLoadButton fullWidth
-                                color="primary"
-                                variant="contained"
-                                endIcon={<SaveIcon/>}
-                                onClick={() => DownLoad(result_message)}>
+                    color="primary"
+                    variant="contained"
+                    endIcon={<SaveIcon />}
+                    onClick={() => DownLoad()}>
                     Download
                 </DownLoadButton>
             </div>
@@ -217,9 +217,9 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                     showUploadList={false}
                 >
                     <UploadButton fullWidth
-                                  color="secondary"
-                                  variant="contained"
-                                  endIcon={<CloudUploadIcon/>}
+                        color="secondary"
+                        variant="contained"
+                        endIcon={<CloudUploadIcon />}
                     >
                         Upload
                     </UploadButton>
