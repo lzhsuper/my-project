@@ -40,7 +40,7 @@
 .tdwidth {
     position: relative;
     z-index: 1;
-    width: 13.7%;
+    width: 11%;
     border-left: 2px dotted rgba(75, 75, 75, 0.19);
     word-break: break-all;
     text-align: center;

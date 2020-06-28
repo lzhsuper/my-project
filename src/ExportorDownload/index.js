@@ -35,6 +35,9 @@ export default function ExportOrDwonload({result, ifselect, SetHomeUpload, setup
                 if (itemu.new_cs !== undefined && itemu.new_cs !== null && itemu.new_cs !== '') {
                     itemu.cs = itemu.new_cs;
                 }
+                if (itemu.new_pt !== undefined && itemu.new_pt !== null && itemu.new_pt !== '') {
+                    itemu.pt = itemu.new_pt;
+                }
             }
         }));
     }

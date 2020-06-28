@@ -1,17 +1,17 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './AddLanguage.css'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import {styled} from '@material-ui/core/styles';
-import {makeStyles} from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import ApolloClient from 'apollo-boost'
-import {gql} from 'apollo-boost'
+import { gql } from 'apollo-boost'
 import cookie from 'react-cookies'
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,9 +24,9 @@ const MySelect = styled(TextField)({
     '& label': {
         fontSize: '20px'
     },
-    '& div': {width: '150px'}
+    '& div': { width: '150px' }
 });
-const projectid = [{id: "1", name: "ToC"}, {id: "2", name: "ToB_Manager"}, {id: "3", name: "ToB_Staff"}, {
+const projectid = [{ id: "1", name: "ToC" }, { id: "2", name: "ToB_Manager" }, { id: "3", name: "ToB_Staff" }, {
     id: "4",
     name: "Web"
 }];
@@ -52,11 +52,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddLanguage({title, fun, projectfrom, seterror}) {
+export default function AddLanguage({ title, fun, projectfrom, seterror }) {
     const classes = useStyles();
     const [English, setEnglish] = useState('');
     const [projectId, setprojectId] = useState(projectfrom);
-    const [transResult, settransResult] = useState({data:{trans:{en:"",es:"",ko:"",ja:"",sk:"",cs:"",fr:""}}});
+    const [transResult, settransResult] = useState({ data: { trans: { en: "", es: "", ko: "", ja: "", sk: "", cs: "", fr: "", pt: "" } } });
     const [tosubmit, settosubmit] = useState(false);
     const [result, setresult] = useState(null);
     const [nullable, setnullable] = useState(false);
@@ -104,6 +104,8 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
             transResultResult.data.trans.cs = value.target.value
         } else if (type === 'fr') {
             transResultResult.data.trans.fr = value.target.value
+        } else if (type === 'pt') {
+            transResultResult.data.trans.pt = value.target.value
         }
         settransResult(transResultResult)
     }
@@ -131,7 +133,7 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
         let NewtransResult = [];
         Object.keys(transResult.data.trans).map(item =>
             NewtransResult[item] = transResult.data.trans[item]);
-        Object.keys(NewtransResult).map(item =>{
+        Object.keys(NewtransResult).map(item => {
             NewtransResult[item] = NewtransResult[item].replace(/\\/g, "\\\\");
             NewtransResult[item] = NewtransResult[item].replace(/"/g, "\\\"");
         });
@@ -149,6 +151,7 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
             sk:"${NewtransResult["sk"]}",
             cs:"${NewtransResult["cs"]}",
             fr:"${NewtransResult["fr"]}",
+            pt:"${NewtransResult["pt"]}",
             mode_name:"${modelname}",
             label:"${label}",
             file_name:"string.xml"
@@ -185,7 +188,7 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
             query: gql`
            {
               trans(en:"${Englishnew !== '' ? EnglishValue : Englishnew}"){
-              en es ja ko sk cs fr
+              en es ja ko sk cs fr pt
               }
            }
             `
@@ -293,6 +296,15 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
                         </div>
                         <div className='editwindow_input'>
                             <FormControl fullWidth className={classes.margin}>
+                                <InputLabel>Portuguese:</InputLabel>
+                                <Input
+                                    onChange={value => Changelanguage(value, 'pt')}
+                                    value={transResult != null ? transResult.data.trans.pt : ''}
+                                />
+                            </FormControl>
+                        </div>
+                        <div className='editwindow_input'>
+                            <FormControl fullWidth className={classes.margin}>
                                 <InputLabel>Label:</InputLabel>
                                 <Input
                                     onChange={value => setlabel(value.target.value)}
@@ -322,9 +334,9 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
                             <div className="svgloading">
                                 {!englisherror ?
                                     <svg x="0px" y="0px"
-                                         viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
+                                        viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
                                         <path fill="black"
-                                              d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
                                             <animateTransform
                                                 attributeName="transform"
                                                 attributeType="XML"
@@ -332,10 +344,10 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
                                                 dur="1s"
                                                 from="0 50 50"
                                                 to="360 50 50"
-                                                repeatCount="indefinite"/>
+                                                repeatCount="indefinite" />
                                         </path>
                                     </svg> :
-                                    <div className="errformat"><img alt="" src={require("./image/error.png")}/></div>}
+                                    <div className="errformat"><img alt="" src={require("./image/error.png")} /></div>}
                             </div>
                             : null}
                     </div>
@@ -359,7 +371,7 @@ export default function AddLanguage({title, fun, projectfrom, seterror}) {
                     </DialogActions>}
             </Dialog>
             : <PopupWindow title='successfull' content='Successful submission of information' oneselect={1}
-                           surebutton='I know' fun={() => fun(false)}/>
+                surebutton='I know' fun={() => fun(false)} />
         }
         </div>
 
