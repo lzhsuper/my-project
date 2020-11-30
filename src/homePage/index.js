@@ -61,7 +61,7 @@ class Homepage extends Component {
             result: null,
             // error: null,
             iflogin_forward: false,
-            language_type: ['', 'all', 'en', 'es', 'ja', 'cs', 'fr', 'sk', 'ko', 'pt'],
+            language_type: ['', 'all', 'en', 'es', 'ja', 'cs', 'fr', 'sk', 'ko', 'pt', 'zh'],
             result_message: null,
             page: 0,
             languageinclude: null,
@@ -180,10 +180,13 @@ class Homepage extends Component {
                 if (!findlanguage(array, 'pt')) {
                     array.push('pt');
                 }
+                if (!findlanguage(array, 'zh')) {
+                    array.push('zh');
+                }
 
             }
             array.push(event.target.value);
-            if (array.length === 9) {
+            if (array.length === 10) {
                 array.push('all')
             }
             this.setState({ language_type: array });
@@ -195,7 +198,6 @@ class Homepage extends Component {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         client.query({
@@ -256,10 +258,13 @@ class Homepage extends Component {
         if (paramfrom.includes('pt')) {
             languageinclude.push('pt')
         }
+        if (paramfrom.includes('zh')) {
+            languageinclude.push('zh')
+        }
         this.setState({ languageinclude: languageinclude, page: 1 });
         let param = 'project_id';
         if (paramfrom.includes('all')) {
-            param = "en es ko ja sk cs fr pt"
+            param = "en es ko ja sk cs fr pt zh"
         } else if (paramfrom.length > 1) {
             param = "";
             for (let i = 0; i < paramfrom.length; i++) {
@@ -270,7 +275,6 @@ class Homepage extends Component {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         client.query({
@@ -278,7 +282,7 @@ class Homepage extends Component {
                 gql`{
                 language(page: 0, pageSize:${from === 'export' ? 10000 : 25}, projectId:${this.state.project_select}, search:${this.state.search}, statusType: ${this.state.status})
                 {
-                    ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr new_pt id status
+                    ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr new_pt new_zh id status
 
                 }
             }`
@@ -286,6 +290,7 @@ class Homepage extends Component {
             .then(reponse => {
                 if (from === 'export') {
                     result = reponse.data.language
+                    return result
                 }
                 else {
                     this.setState({
@@ -304,7 +309,7 @@ class Homepage extends Component {
         const paramfrom = this.state.language_type;
         let param = 'project_id';
         if (paramfrom.includes('all')) {
-            param = "en es ko ja sk cs fr pt"
+            param = "en es ko ja sk cs fr pt zh"
         } else if (paramfrom.length > 1) {
             param = "";
             for (let i = 0; i < paramfrom.length; i++) {
@@ -315,7 +320,6 @@ class Homepage extends Component {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         client.query({
@@ -323,7 +327,7 @@ class Homepage extends Component {
                 gql`{
                 language(page: ${this.state.page}, pageSize:25, projectId:${this.state.project_select},search:${this.state.search},statusType: ${this.state.status})
                 {
-                    ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr new_pt id status
+                    ${param} new_en new_es new_ko new_ja new_sk new_cs new_fr new_pt new_zh id status
 
                 }
             }`
@@ -375,7 +379,6 @@ class Homepage extends Component {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         Object.keys(contentold[0]).map(item => {
@@ -397,7 +400,8 @@ class Homepage extends Component {
                         sk:"${contentnew[0].new_sk}",
                         cs:"${contentnew[0].new_cs}",
                         fr:"${contentnew[0].new_fr}",
-                        pt:"${contentnew[0].new_pt}"
+                        pt:"${contentnew[0].new_pt}",
+                        zh:"${contentnew[0].new_zh}"
                     })
                     {
                         id
@@ -470,7 +474,6 @@ class Homepage extends Component {
         }
     }
     render() {
-        console.log(this.state.result_message)
         return (
             this.state.severpass === true
                 ?
@@ -493,7 +496,7 @@ class Homepage extends Component {
                                         <div className='Logo'><span><b>TappLock</b></span></div>
                                     </Grid>
                                     <Grid item lg={3} md={4} xs={6}>
-                                        <Grid container alignItems='center' spacing={2} justify='flex-end' style={{paddingRight:50}}>
+                                        <Grid container alignItems='center' spacing={2} justify='flex-end' style={{ paddingRight: 50 }}>
                                             <Grid item>
                                                 <div className='personalimage'><img src={require('./images/admin.png')}
                                                     alt="" />
@@ -529,9 +532,9 @@ class Homepage extends Component {
                                     : null
                         }
                         <div className='homepageUI'>
-                            <div className='object_location'>
+                            <Grid container style={{ padding: '0 10px 0 10px' }}>
                                 {this.state.result ?
-                                    <div className='radiolocation'>
+                                    <Grid item lg={1} md={2}>
                                         <MySelect
                                             id="standard-select-currency"
                                             select
@@ -546,9 +549,9 @@ class Homepage extends Component {
                                                 </MenuItem>
                                             ))}
                                         </MySelect>
-                                    </div>
+                                    </Grid>
                                     : null}
-                                <div className='LanguageStatus'>
+                                <Grid item lg={1} md={2}>
                                     <MySelect
                                         id="status"
                                         select
@@ -563,79 +566,87 @@ class Homepage extends Component {
                                             </MenuItem>
                                         ))}
                                     </MySelect>
-                                </div>
-                                
-                                <div className='searchinput'>
-                                    <MyTextField
-                                        onKeyUp={e => this.search(e)}
-                                        id="outlined-search"
-                                        label="Search field"
-                                        type="search"
-                                        margin="dense"
-                                        variant="outlined"
-                                        onChange={(search) => this.changeSearch(search)}
-                                    />
-                                </div>
-                                <div className='searchclick'>
-                                    <Button fullWidth
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={() => this.submitSearch()}>
-                                        Search
+                                </Grid>
+                                <Grid item lg={8} md={8} style={{ paddingLeft: 30 }}>
+                                    <Grid container>
+                                        <Grid item xs={3} md={1} lg={1} className=''>
+                                            <Checkbox type='checkbox' name='lanuage_all' value='all'
+                                                onChange={e => this.change_language_select(e)}
+                                                checked={this.state.language_type.includes('all')}
+                                            />
+                                            <label>All</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_en' value='en'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('en')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>English</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_es' value='es'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('es')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Spanish</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='ko'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('ko')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Korean</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='ja'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('ja')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Japanese</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='sk'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('sk')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Slovakia</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='cs'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('cs')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Czech</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='fr'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('fr')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>French</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_pt' value='pt'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('pt')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Portuguese</label>
+                                        </Grid>
+                                        <Grid item xs={3} md={1} lg={1} className='selectone'><Checkbox type='checkbox' name='lanuage_zh' value='zh'
+                                            checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('zh')}
+                                            onChange={e => this.change_language_select(e)} />
+                                            <label>Chinese</label>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item lg={2} md={4}>
+                                    <Grid container spacing={2}>
+                                        <Grid item lg={8}>
+                                            <MyTextField
+                                                onKeyUp={e => this.search(e)}
+                                                id="outlined-search"
+                                                label="Search field"
+                                                type="search"
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={(search) => this.changeSearch(search)}
+                                            />
+                                        </Grid>
+                                        <Grid item lg={4}>
+                                            <Button fullWidth
+                                                variant="contained"
+                                                color="primary"
+                                                onClick={() => this.submitSearch()}>
+                                                Search
                                     </Button>
-                                </div>
-                            </div>
-                            <div className='languageUI'>
-                                    <div className='selectone'><label />
-                                    </div>
-                                    <div className='selectone'>
-                                        <Checkbox type='checkbox' name='lanuage_all' value='all'
-                                            onChange={e => this.change_language_select(e)}
-                                            checked={this.state.language_type.includes('all')}
-                                        />
-                                        <label>All</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_en' value='en'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('en')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>English</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_es' value='es'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('es')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Spanish</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='ko'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('ko')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Korean</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='ja'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('ja')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Japanese</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='sk'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('sk')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Slovakia</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='cs'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('cs')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Czech</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_ko' value='fr'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('fr')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>French</label>
-                                    </div>
-                                    <div className='selectone'><Checkbox type='checkbox' name='lanuage_pt' value='pt'
-                                        checked={findlanguage(this.state.language_type, 'all') || this.state.language_type.includes('pt')}
-                                        onChange={e => this.change_language_select(e)} />
-                                        <label>Portuguese</label>
-                                    </div>
-                                </div>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </div>
                         <div className='selectlanguage'>
                             <div className="addlanguage">
@@ -690,6 +701,9 @@ class Homepage extends Component {
                                                 {this.state.languageinclude && this.state.languageinclude.includes('pt')
                                                     ?
                                                     <th className='thstyle'><h2>pt</h2></th> : null}
+                                                {this.state.languageinclude && this.state.languageinclude.includes('zh')
+                                                    ?
+                                                    <th className='thstyle'><h2>zh</h2></th> : null}
                                                 <th className='thstyle'><h2>Editor</h2></th>
                                             </tr>
                                             {
@@ -768,6 +782,15 @@ class Homepage extends Component {
                                                                     </div>
                                                                     <div>
                                                                         <p className='contentcolor'>{item_content.new_pt !== null ? item_content.new_pt : null}</p>
+                                                                    </div>
+                                                                </td> : null}
+                                                            {this.state.languageinclude && this.state.languageinclude.includes('zh') ?
+                                                                <td className='width'>
+                                                                    <div>
+                                                                        <p>{item_content.zh === null || item_content.zh === '' ? 'No content' : item_content.zh}</p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className='contentcolor'>{item_content.new_zh !== null ? item_content.new_zh : null}</p>
                                                                     </div>
                                                                 </td> : null}
                                                             <td className='width_edit'>

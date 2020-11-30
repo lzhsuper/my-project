@@ -147,6 +147,16 @@ export default function EditWindow({ title, fun, language_type, submit, content,
                             {languagetype_old.includes('pt') ? item.new_pt ? <p>
                                 <span><b>new_pt: </b>{item.new_pt === null ? '' : item.new_pt}</span>
                             </p> : null : null}
+                            {languagetype_old.includes('zh') ? <p>
+                                <span><b>zh: </b>{item.zh === null || item.zh === '' ? 'No content' : item.zh}</span>&nbsp;&nbsp;
+                                    <button
+                                    className='modify_button'
+                                    onClick={() => setModify(item.id, 'zh')}>Modify
+                                    </button>
+                            </p> : null}
+                            {languagetype_old.includes('zh') ? item.new_zh ? <p>
+                                <span><b>new_zh: </b>{item.new_zh === null ? '' : item.new_zh}</span>
+                            </p> : null : null}
                         </div>
                     )}
                 </div>
@@ -160,7 +170,8 @@ export default function EditWindow({ title, fun, language_type, submit, content,
                                                 : languagetype === 'cs' ? contentnew[0].cs === null ? 'Czech: ' : 'Czech: ' + contentnew[0].cs
                                                     : languagetype === 'fr' ? contentnew[0].fr === null ? 'France: ' : 'France: ' + contentnew[0].fr
                                                         : languagetype === 'pt' ? contentnew[0].pt === null ? 'Portuguese: ' : 'Portuguese: ' + contentnew[0].pt
-                                                            : null}
+                                                            : languagetype === 'zh' ? contentnew[0].zh === null ? 'Chinese: ' : 'Chinese: ' + contentnew[0].zh
+                                                                : null}
                         </div>
                         <div className='editwindow_input'>
                             <TextField

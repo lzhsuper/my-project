@@ -104,6 +104,11 @@ export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setu
     }
 
     function DownLoad(fileName = 'LanguageEdit.xlsx') {
+        const getData = async () => {
+            let datal = await search('export')
+            console.log(datal)
+        }
+        getData()
         let data = null;
         if (result !== null) {
             data = JSON.parse(JSON.stringify(result));
@@ -132,6 +137,9 @@ export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setu
                     }
                     if (itemu.new_pt !== undefined && itemu.new_pt !== null && itemu.new_pt !== '') {
                         itemu.pt = itemu.new_pt;
+                    }
+                    if (itemu.new_zh !== undefined && itemu.new_zh !== null && itemu.new_zh !== '') {
+                        itemu.zh = itemu.new_zh;
                     }
                 }
             }));
@@ -183,7 +191,7 @@ export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setu
                     output,
                     {
                         '!ref': ref,
-                        '!cols': [{ wpx: 45 }, { wpx: 100 }, { wpx: 200 }, { wpx: 80 }, { wpx: 150 }, { wpx: 100 }, { wpx: 300 }, { wpx: 300 }],
+                        '!cols': [{ wpx: 45 }, { wpx: 100 }, { wpx: 200 }, { wpx: 80 }, { wpx: 150 }, { wpx: 100 }, { wpx: 300 }, { wpx: 300 }, { wpx: 300 }],
                     },
                 ),
             },

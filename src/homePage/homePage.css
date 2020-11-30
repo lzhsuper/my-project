@@ -24,21 +24,19 @@
 
 .homepageUI {
     background-color: white;
-    height: 10%;
     position: relative;
     z-index: 2;
     margin: auto;
+    padding-top: 20px;
     box-shadow: 0 1px 10px black;
 }
 
 .object_location {
     width: 99%;
-    height: 90%;
     background-color: rgba(94, 94, 94, 0);
     position: relative;
     z-index: 1;
     /*left: 0.1%;*/
-    top: 10%;
 }
 
 .formselect {
@@ -126,10 +124,10 @@
 }
 
 .languageUI {
-    position: absolute;
+    position: relative;
     z-index: 1;
     left: 370px;
-    width: 45%;
+    width: 69% !important;
     height: 70%;
     top: 33%;
     /*background-color: white;*/
@@ -181,7 +179,7 @@
 td.width {
     position: relative;
     z-index: 1;
-    width: 12.5%;
+    width: 10.5%;
     border-left: 2px dotted rgba(75, 75, 75, 0.1);
     word-break: break-all;
     text-align: left;
@@ -311,8 +309,6 @@ img {
     position: absolute;
     z-index: 1;
     left: 10px;
-    height: 100%;
-    top: 3%;
 }
 
 .selectlanguage {

@@ -34,12 +34,12 @@ export default function UploadContentWin({title, content, close, refreceToken, f
         contentup = contentup.replace(/"cs":/g, "cs:");
         contentup = contentup.replace(/"fr":/g, "fr:");
         contentup = contentup.replace(/"pt":/g, "pt:");
+        contentup = contentup.replace(/"zh":/g, "zh:");
         contentup = contentup.replace(/"id":/g, "id:");
         const client = new ApolloClient({
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         client.mutate({

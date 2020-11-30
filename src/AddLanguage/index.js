@@ -56,7 +56,7 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
     const classes = useStyles();
     const [English, setEnglish] = useState('');
     const [projectId, setprojectId] = useState(projectfrom);
-    const [transResult, settransResult] = useState({ data: { trans: { en: "", es: "", ko: "", ja: "", sk: "", cs: "", fr: "", pt: "" } } });
+    const [transResult, settransResult] = useState({ data: { trans: { en: "", es: "", ko: "", ja: "", sk: "", cs: "", fr: "", pt: "", zh: "" } } });
     const [tosubmit, settosubmit] = useState(false);
     const [result, setresult] = useState(null);
     const [nullable, setnullable] = useState(false);
@@ -106,6 +106,8 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
             transResultResult.data.trans.fr = value.target.value
         } else if (type === 'pt') {
             transResultResult.data.trans.pt = value.target.value
+        } else if (type === 'zh') {
+            transResultResult.data.trans.zh = value.target.value
         }
         settransResult(transResultResult)
     }
@@ -127,7 +129,6 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         let NewtransResult = [];
@@ -152,6 +153,7 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
             cs:"${NewtransResult["cs"]}",
             fr:"${NewtransResult["fr"]}",
             pt:"${NewtransResult["pt"]}",
+            zh:"${NewtransResult["zh"]}",
             mode_name:"${modelname}",
             label:"${label}",
             file_name:"string.xml"
@@ -179,7 +181,6 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
             uri: HOST,
             headers: {
                 token: cookie.load('tokenaccessToken'),
-                refreshToken: cookie.load('refreshToken'),
             },
         });
         let EnglishValue = English.replace(/\\/g, "\\\\");
@@ -188,7 +189,7 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
             query: gql`
            {
               trans(en:"${Englishnew !== '' ? EnglishValue : Englishnew}"){
-              en es ja ko sk cs fr pt
+              en es ja ko sk cs fr pt zh
               }
            }
             `
@@ -300,6 +301,15 @@ export default function AddLanguage({ title, fun, projectfrom, seterror }) {
                                 <Input
                                     onChange={value => Changelanguage(value, 'pt')}
                                     value={transResult != null ? transResult.data.trans.pt : ''}
+                                />
+                            </FormControl>
+                        </div>
+                        <div className='editwindow_input'>
+                            <FormControl fullWidth className={classes.margin}>
+                                <InputLabel>Chinese:</InputLabel>
+                                <Input
+                                    onChange={value => Changelanguage(value, 'zh')}
+                                    value={transResult != null ? transResult.data.trans.zh : ''}
                                 />
                             </FormControl>
                         </div>
