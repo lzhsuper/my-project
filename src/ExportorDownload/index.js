@@ -67,6 +67,18 @@ export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setu
                         break; // 如果只取第一张表，就取消注释这行
                     }
                 }
+                data.map(item => {
+                    if (item.en) item.en = item.en.toString();
+                    if (item.es) item.es = item.es.toString();
+                    if (item.ko) item.ko = item.ko.toString();
+                    if (item.ja) item.ja = item.ja.toString();
+                    if (item.sk) item.sk = item.sk.toString();
+                    if (item.cs) item.cs = item.cs.toString();
+                    if (item.fr) item.fr = item.fr.toString();
+                    if (item.pt) item.pt = item.pt.toString();
+                    if (item.zh) item.zh = item.zh.toString();
+                }
+                )
                 // 最终获取到并且格式化后的 json 数据
                 message.success('文件解析成功！');
                 // data.map((item) => item.hasOwnProperty('en') ? true : item.en = null);
@@ -106,7 +118,6 @@ export default function ExportOrDwonload({ result, ifselect, SetHomeUpload, setu
     function DownLoad(fileName = 'LanguageEdit.xlsx') {
         const getData = async () => {
             let datal = await search('export')
-            console.log(datal)
         }
         getData()
         let data = null;

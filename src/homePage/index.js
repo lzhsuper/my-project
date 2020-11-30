@@ -388,7 +388,6 @@ class Homepage extends Component {
             contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/\\/g, '\\\\');
             contentnew[0][item] = contentnew[0][item] === null ? '' : contentnew[0][item].toString().replace(/\"/g, "\\\"");
         });
-        console.log(contentnew[0])
         client.mutate({
             mutation: gql`                
                 mutation update{

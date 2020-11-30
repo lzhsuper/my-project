@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import {styled} from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
 import './UploadContentWin.css'
 import ApolloClient from 'apollo-boost'
 import HOST from "../settingurl";
 import cookie from "react-cookies";
-import {gql} from "apollo-boost";
+import { gql } from "apollo-boost";
 import ReplyIcon from '@material-ui/icons/Reply';
 
 const MyButton = styled(Button)({
@@ -19,13 +19,12 @@ const MyButton = styled(Button)({
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-export default function UploadContentWin({title, content, close, refreceToken, filename, languageTitle}) {
+export default function UploadContentWin({ title, content, close, refreceToken, filename, languageTitle }) {
     content.map((item) => item.id = Number(item.id));
     content.map((item) => Object.keys(item).map((key) => item[key] === 'No content' ? item[key] = null : item[key] = item[key]));
     const [reponse, setreponse] = useState(null);
     const submit = () => {
         let contentup = JSON.stringify(content);
-        // console.log(contentup.match(/(\")\w*(\"\:)/g)[0]);
         contentup = contentup.replace(/"en":/g, "en:");
         contentup = contentup.replace(/"es":/g, "es:");
         contentup = contentup.replace(/"ko":/g, "ko:");
@@ -48,8 +47,8 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                     updateMultiLang(langs:${contentup})
                 }`
         })
-        .then(reponse => setreponse(reponse))
-        .catch(error => refreceToken(submit, error));
+            .then(reponse => setreponse(reponse))
+            .catch(error => refreceToken(submit, error));
 
     };
 
@@ -72,7 +71,7 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                 >
                     <DialogTitle id="alert-dialog-title">{title} ( '{filename}' )</DialogTitle>
                     <div className='CancelButton'>
-                        <MyButton onClick={() => close()} startIcon={<ReplyIcon/>}>Cancel</MyButton>
+                        <MyButton onClick={() => close()} startIcon={<ReplyIcon />}>Cancel</MyButton>
                     </div>
                     <div className='UploadButton'>
                         <MyButton onClick={() => submit()}>Submit</MyButton>
@@ -89,18 +88,18 @@ export default function UploadContentWin({title, content, close, refreceToken, f
                                         )
                                         : null}
                                 </tr>
-                            <tr className='titlePlaceholder' />
-                            {content !== null
-                                ?
-                                content.map((item) =>
-                                    <tr key={item.id} className='trcontent'>
-                                        {languageTitle.map((key) =>
-                                            <td className={key === 'id' ? 'tdIdwidth' : 'tdwidth'}
-                                                key={key}>{item[key] === null || item[key] === undefined || item[key] === '' ? 'No content' : item[key]}</td>
-                                        )}
-                                    </tr>
-                                )
-                                : null}
+                                <tr className='titlePlaceholder' />
+                                {content !== null
+                                    ?
+                                    content.map((item) =>
+                                        <tr key={item.id} className='trcontent'>
+                                            {languageTitle.map((key) =>
+                                                <td className={key === 'id' ? 'tdIdwidth' : 'tdwidth'}
+                                                    key={key}>{item[key] === null || item[key] === undefined || item[key] === '' ? 'No content' : item[key]}</td>
+                                            )}
+                                        </tr>
+                                    )
+                                    : null}
                             </tbody>
                         </table>
                     </div>
